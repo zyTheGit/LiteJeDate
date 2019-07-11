@@ -3,8 +3,13 @@
 
 ## [jeDate V6.5.0 日期控件](http://www.jemui.com/)
 
-![]
+![range](https://github.com/zyTheGit/LiteJeDate/blob/master/src/img/%E5%8F%8C%E9%9D%A2%E6%9D%BF%E9%80%89%E6%8B%A9.png)
 
+![自定义](https://github.com/zyTheGit/LiteJeDate/blob/master/src/img/%E8%87%AA%E5%AE%9A%E4%B9%89.png)
+
+![自定义](https://github.com/zyTheGit/LiteJeDate/blob/master/src/img/%E4%B8%87%E5%B9%B4%E5%8E%86.png)
+
+![自定义主题](https://github.com/zyTheGit/LiteJeDate/blob/master/src/img/%E5%8F%8C%E6%A8%A1%E7%89%88.png)
 
 ## 优势 
 * 使用简单
