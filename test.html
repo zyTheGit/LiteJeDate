@@ -1,22 +1,150 @@
 <!doctype html>
 <html lang="en">
- <head>
+
+<head>
   <meta charset="UTF-8">
   <meta name="Generator" content="EditPlus®">
   <meta name="Author" content="">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
   <title>Document</title>
- </head>
- <body>
- <input type="text" readonly class='test'>
-  <script src='./dist/LiteJeDate.js'></script>	
+</head>
+
+<body>
+  万年历：<input type="text" readonly class='test'><br />
+  日期范围限定在昨天到明天：<input type="text" readonly class='test1'><br />
+  主题色更改：<input type="text" readonly class='test2'><br />
+  双面板主题色更改：<input type="text" readonly class='test3'><br />
+  单面板左边快捷菜单: <input type="text" readonly class='test4'><br />
+  只显示年月：<input type="text" readonly class='test5'><br />
+  区域选择：<input type="text" readonly class='test6'><br />
+  设置默认时间：<input type="text" readonly class='test7'><br />
+  初始化时间加减：<input type="text" readonly class='test8'><br />
+  回调函数toggle:<input type="text" readonly class='test9'><br />
+  回调函数donefun:<input type="text" readonly class='test10'><br />
+  事件触发trigger:<input type="text" readonly class='test11'><br />
+  <script src='./dist/LiteJeDate.js'></script>
   <script>
-  jeDate(".test",{
-        format:"YYYY年MM月DD日 hh:mm",
-        isTime:true,
-        festival: true,
-        minDate:"2014-09-19 00:00:00"
-    })</script>
- </body>
+    //万年历
+    jeDate(".test", {
+      format: "YYYY年MM月DD日 hh:mm",
+      isTime: true,
+      festival: true,
+      minDate: "2014-09-19 00:00:00"
+    })
+    //日期范围限定在昨天到明天
+    jeDate(".test1", {
+      format: "YYYY-MM-DD",
+      minDate: jeDate.nowDate({ DD: "-1" }), //0代表今天，-1代表昨天，-2代表前天，以此类推
+      maxDate: jeDate.nowDate({ DD: "+1" })
+    })
+    //双面板主题色更改
+    jeDate(".test2", {
+      format: "YYYY年MM月DD日 hh:mm",
+      isTime: true,
+      festival: true,
+      minDate: "2014-09-19 00:00:00"
+    })
+    //双面板主题色更改
+    jeDate(".test3", {
+      multiPane: false,
+      theme: { bgcolor: "#D91600", pnColor: "#FF6653" },
+      format: "YYYY-MM-DD hh:mm:ss"
+    })
+    //单面板左边快捷菜单
+    jeDate(".test4", {
+      shortcut: [
+        { name: "一周", val: { DD: 7 } },
+        { name: "一个月", val: { DD: 30 } },
+        { name: "二个月", val: { MM: 2 } },
+        { name: "三个月", val: { MM: 3 } },
+        { name: "一年", val: { DD: 365 } }
+      ],
+      format: "YYYY-MM-DD hh:mm:ss"
+    })
+    //只显示年月
+    jeDate(".test5", {
+      isinitVal: true,
+      format: 'YYYY-MM' // 分隔符可以任意定义，该例子表示只显示年月
+    })
+    //区域选择：
+    jeDate(".test6", {
+      multiPane: false,
+      range: " To ",
+      format: 'YYYY-MM-DD hh:mm:ss'
+    })
+    //设置默认时间
+    jeDate(".test7", {
+      isinitVal: true,
+      initDate: [{ hh: 10, mm: 00, ss: 00 }, false],
+      minDate: '2016-06-16',
+      maxDate: '2025-06-16',
+      format: "YYYY年MM月DD日 hh:mm:ss",
+      zIndex: 3000
+    })
+    //初始化时间加减：
+    jeDate(".test8", {
+      isinitVal: true,
+      initDate: [{ MM: "+3" }, true],   //初始化日期加3个月
+      festival: true,
+      format: 'YYYY年MM月DD日 hh:mm:ss'
+    })
+    //时间戳转换
+    jeDate.timeStampDate("2017-11-16 10:35:22")    //得到 1513391722
+
+    //回调函数toggle
+    jeDate('.test9',{
+        format: 'YYYY-MM-DD hh:mm:ss',
+        minDate: '2010-06-16 09:15:35', 
+        maxDate: '2099-06-16 23:59:59', 
+        toggle: function(obj){
+            console.log(obj.elem);     //得到当前输入框的ID
+            console.log(obj.val);      //得到日期生成的值，如：2017-06-16
+        
+            //得到日期时间对象，range为false
+            console.log(obj.date);     //这里是对象        
+            obj.date = {YYYY: 2017, MM: 08, DD: 18, hh: 10, mm: 25, ss: 10}
+        }   
+    })
+
+    //回调函数donefun
+    jeDate('.test10',{
+        format: 'YYYY年MM月DD日 hh:mm:ss',
+        minDate: '2010-06-16 09:15:35', 
+        maxDate: '2099-06-16 23:59:59', 
+        donefun: function(obj){
+            //this    而this指向的都是当前实例
+            console.log(obj.elem);     //得到当前输入框的ID
+            console.log(obj.val);      //得到日期生成的值，如：2017-06-16
+        
+            //得到日期时间对象，range为false
+            console.log(obj.date);    //这里是对象   
+            obj.date = {YYYY: 2017, MM: 08, DD: 18, hh: 10, mm: 25, ss: 10}
+        
+            //开启区域选择，range为字符串 时才会返回一个日期时间数组对象。
+            console.log(obj.date);    //这里是数组
+            obj.date = [
+                {YYYY: 2017, MM: 08, DD: 18, hh: 10, mm: 25, ss: 10},
+                {YYYY: 2019, MM: 11, DD: 25, hh: 15, mm: 30, ss: 25}
+            ]
+        }   
+    })
+
+    //事件触发trigger
+    jeDate(".test11",{
+        trigger: "mouseenter",  //可绑定一个或多个事件
+        minDate: '2016-06-16',
+        maxDate: '2025-06-16',
+        format:"YYYY年MM月DD日 hh:mm:ss",
+        zIndex:3000
+    })
+
+    //扩展一个对象 jeDate.extend
+    //合并 settings 和 options，修改并返回 settings
+    var settings = { validate: false, limit: 5, name: "foo" };
+    var options = { validate: true, name: "bar" };
+    jeDate.extend(settings, options);
+  </script>
+</body>
+
 </html>
