@@ -1,7 +1,7 @@
 # LiteJeDate
 只需要引用一个文件的日期插件
 
-## [jeDate V6.5.0 日期控件](http://www.jemui.com/)
+## [jeDate V6.5.0 日期控件](http://www.jemui.com/uidoc/jedate.html#attention)
 
 ![range](https://github.com/zyTheGit/LiteJeDate/blob/master/src/img/%E5%8F%8C%E9%9D%A2%E6%9D%BF%E9%80%89%E6%8B%A9.png)
 
